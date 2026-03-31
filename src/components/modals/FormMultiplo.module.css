@@ -1,0 +1,53 @@
+/* src/components/modals/FormMultiplo.module.css */
+.form { display: flex; flex-direction: column; gap: 1.2rem; }
+.tabContainer { display: flex; gap: 1rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+.tab { background: none; border: none; padding: 10px; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: color 0.2s; }
+.row { display: flex; gap: 1rem; }
+.inputGroup { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; position: relative; }
+.label { color: var(--text-muted); font-size: 0.8rem; font-weight: 600; }
+.input { background-color: var(--bg-color); color: var(--text-main); border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-size: 1rem; outline: none; }
+.actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem; }
+.btnCancel { background-color: transparent; color: var(--text-muted); border: none; cursor: pointer; font-weight: 600;}
+.btnSubmit { background-color: var(--primary); color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+/* A mágica do Mobile: Quebra as colunas (data e valor) para linhas empilhadas */
+@media (max-width: 600px) {
+  .row { flex-direction: column; gap: 1.2rem; }
+}
+
+/* NOVAS CLASSES PARA O MENU SUSPENSO CUSTOMIZADO */
+.dropdown {
+  position: absolute;
+  top: 100%; /* Fica exatamente embaixo do input */
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 50; /* Fica por cima dos outros inputs */
+  list-style: none;
+  padding: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.dropdownItem {
+  padding: 12px 15px;
+  cursor: pointer;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background-color: var(--primary);
+  color: white;
+}
+

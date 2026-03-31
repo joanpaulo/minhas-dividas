@@ -1,0 +1,244 @@
+/* 1. O FUNDO ESTÁTICO (O Dock) */
+.dockContainer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  padding: 12px 20px; /* Cria a borda ao redor dos botões */
+  z-index: 999;
+  align-items: center;
+  
+  /* Efeito de Vidro (Glassmorphism) na barra principal */
+  background: rgba(30, 41, 59, 0.85); 
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* O escudo invisível que cobre a tela inteira quando o menu está aberto */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 998; 
+  /* Fundo escurecido e desfoque moderno */
+  background: rgba(15, 23, 42, 0.6); 
+  backdrop-filter: blur(4px); 
+  transition: all 0.3s ease;
+}
+
+
+/* 2. O CAMPO DE FORÇA (Invisível, recebe o Hover) */
+.dockWrapper {
+  position: relative;
+  height: 55px; /* Altura padrão dos botões guardados no dock */
+  cursor: pointer;
+}
+
+/* 3. A PEÇA VISUAL (O Card que salta) */
+.dockCard {
+  height: 100%;
+  /* Fundo sutil para destacar levemente dentro da barra escura */
+  background: rgba(255, 255, 255, 0.05); 
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Tipos de Cards */
+.btnCard {
+  width: 55px;
+  color: var(--text-muted);
+}
+
+.valueCard {
+  padding: 0 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* ==================================================== */
+/* A MÁGICA: O SALTO PARA FORA DA BORDA */
+/* ==================================================== */
+
+/* Pula 24px para cima, cruzando a borda superior do Dock */
+.dockWrapper:hover .dockCard {
+  transform: translateY(-24px); 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Cores e Brilho no Hover */
+.dockWrapper:hover .summaryBtn {
+  background: #6366f1; /* Azul */
+  color: white;
+  border-color: #6366f1;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.6);
+}
+
+.dockWrapper:hover .addBtn {
+  background: #8b5cf6; /* Roxo */
+  color: white;
+  border-color: #8b5cf6;
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.6);
+}
+
+.dockWrapper:hover .valueCard {
+  background: rgba(51, 65, 85, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==================================================== */
+/* Tipografia */
+/* ==================================================== */
+
+.label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* Novo container que segura todos os valores juntos */
+.valuesContainer {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  position: relative;
+}
+
+.extraCards {
+  display: flex;
+  gap: 12px;
+}
+
+/* ==================================================== */
+/* 📱 MOBILE RESPONSIVE (Com Keyframes de Entrada e Saída) */
+/* ==================================================== */
+@media (max-width: 768px) {
+  
+  /* Desativa o Hover Pulo nos Cards de Valor no Mobile */
+  .dockWrapper:hover .valueCard {
+    transform: none;
+    background: rgba(30, 41, 59, 0.75);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* DEIXA OS CARDS QUE SOBEM TOTALMENTE SÓLIDOS */
+  .extraWrapper .dockCard {
+    background: var(--card-bg); /* Usa a cor sólida do tema escuro */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8); /* Sombra forte para destacar */
+  }
+
+  /* O Card de Total Geral Salta um pouquinho e também fica SÓLIDO */
+  .totalExpanded .dockCard {
+    transform: translateY(-15px);
+    background: var(--card-bg); /* Cor sólida aqui também */
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Container dos cards extras no Mobile */
+  .extraCards {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1; /* Atrás do Total Geral */
+    pointer-events: none;
+  }
+
+  /* O Card Secundário Base (Escondido) */
+  .extraWrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    width: max-content;
+  }
+
+  /* Posições Alvo no eixo Y (O quão alto cada card vai) */
+  .card1 { --target-y: -75px; }  /* Atrasado */
+  .card2 { --target-y: -140px; } /* No Mês */
+  .card3 { --target-y: -205px; } /* Hoje */
+
+
+  /* ======================================= */
+  /* ANIMAÇÃO 1: ENTRADA (POP UP)            */
+  /* ======================================= */
+  .open .extraWrapper {
+    pointer-events: auto;
+    animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+  
+  /* Entram na ordem: De baixo para cima */
+  .open .card1 { animation-delay: 0.05s; }
+  .open .card2 { animation-delay: 0.10s; }
+  .open .card3 { animation-delay: 0.15s; }
+
+  @keyframes popUp {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    100% { transform: translateY(var(--target-y)) scale(1); opacity: 1; }
+  }
+
+
+  /* ======================================= */
+  /* ANIMAÇÃO 2: SAÍDA (PUXADINHA E VOO)     */
+  /* ======================================= */
+  .closing .extraWrapper {
+    pointer-events: none;
+    
+    /* ESSAS DUAS LINHAS EVITAM A PISCADA:
+       Elas "congelam" o card na posição aberta antes da animação assumir o controle */
+    opacity: 1;
+    transform: translateY(var(--target-y)) scale(1);
+    
+    /* Podemos até aumentar de 0.5s para 0.6s para curtir mais o voo */
+    animation: shootRight 0.6s forwards; 
+  }
+
+
+  .closing .card3 { animation-delay: 0.0s; }
+  .closing .card2 { animation-delay: 0.10s; }
+  .closing .card1 { animation-delay: 0.20s; }
+
+  @keyframes shootRight {
+    0% { 
+      transform: translateY(var(--target-y)) translateX(0); 
+      opacity: 1; 
+      animation-timing-function: ease-out; /* Começa freiando */
+    }
+    30% { 
+      transform: translateY(var(--target-y)) translateX(-20px); /* A puxadinha pra esquerda */
+      opacity: 1; 
+      animation-timing-function: ease-in; /* Acelera com tudo pra direita */
+    }
+    90% {
+      /* Segura a opacidade sólida enquanto cruza a tela toda! */
+      opacity: 1; 
+    }
+    100% { 
+      transform: translateY(var(--target-y)) translateX(120vw); /* Fora da tela */
+      opacity: 0; /* Só some de verdade aqui no finalzinho */
+    }
+  }
+
+}
+
+

@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  
+  /* A MÁGICA QUE REMOVE A TELA AZUL DE CLIQUE NO MOBILE 👇 */
+  -webkit-tap-highlight-color: transparent; 
+}
+
+
+:root {
+  /* Paleta Dark Moderna */
+  --bg-color: #0f172a; /* Fundo principal */
+  --card-bg: #1e293b; /* Fundo de cartões e modais */
+  --text-main: #f8fafc; /* Texto branco/claro */
+  --text-muted: #94a3b8; /* Texto secundário/cinza */
+  --primary: #6366f1; /* Roxo/Indigo moderno para botões */
+  --primary-hover: #4f46e5;
+  --danger: #ef4444; /* Vermelho para dívidas */
+  --success: #22c55e; /* Verde para pago */
+  --border: #334155; /* Linhas sutis */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
