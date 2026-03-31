@@ -1,16 +1,53 @@
-# React + Vite
+# Minhas Dívidas 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um dashboard moderno e minimalista para gestão de dívidas e boletos, desenvolvido com **React + Vite** e integrado com **Airtable**.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Dashboard Moderno**: Visualização clara de dívidas pendentes, totais e status de pagamento.
+- **PWA (Progressive Web App)**: Instale o aplicativo diretamente no seu celular ou desktop para acesso rápido offline.
+- **Gestão Ágil**: Cadastro e edição de cartões, boletos e empréstimos.
+- **Integração Airtable**: Sincronização em tempo real dos seus dados.
 
-## React Compiler
+## 🚀 Como Executar
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Clonar o Repositório**:
+   ```bash
+   git clone https://github.com/joanpaulo/minhas-dividas.git
+   cd minhas-dividas
+   ```
 
-## Expanding the ESLint configuration
+2. **Instalar Dependências**:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. **Configurar Variáveis de Ambiente**:
+   Crie um arquivo `.env` baseado no `.env.example`:
+   ```env
+   VITE_AIRTABLE_TOKEN=seu_token_aqui
+   VITE_AIRTABLE_BASE_ID=seu_base_id_aqui
+   ```
+
+4. **Executar em Desenvolvimento**:
+   ```bash
+   npm run dev
+   ```
+
+## 🛠️ Tecnologias Utilizadas
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Airtable API](https://airtable.com/api)
+- [Vite PWA Plugin](https://vite-pwa-org.netlify.app/)
+- [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+## 📱 PWA
+
+O projeto está configurado como PWA. Para testar a instalação:
+1. Execute o build: `npm run build`
+2. Visualize o preview: `npm run preview`
+3. Clique no ícone de instalação na barra de endereços do navegador.
+
+---
+Desenvolvido por [Joan Paulo](https://github.com/joanpaulo)
