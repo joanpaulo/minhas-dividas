@@ -1,41 +1,27 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
 import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      injectRegister: 'auto',
       manifest: {
         name: 'Minhas Dívidas',
-        short_name: 'Dividas',
-        description: 'Gerencie suas dívidas e boletos de forma simples e segura.',
-        theme_color: '#0a0a0a',
-        background_color: '#0a0a0a',
-        display: 'standalone',
+        short_name: 'Dívidas',
+        description: 'Gerenciador Financeiro Avançado',
+        theme_color: '#0f172a', /* Cor do topo do app no celular */
+        background_color: '#0f172a',
+        display: 'standalone', /* Faz sumir a barra do navegador! */
         icons: [
           {
-            src: 'icon-192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'icon-512.png',
+            src: 'https://cdn-icons-png.flaticon.com/512/3135/3135679.png', /* Ícone genérico de carteira, você pode trocar depois */
             sizes: '512x512',
             type: 'image/png'
-          },
-          {
-            src: 'icon-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable'
           }
         ]
       }
     })
-  ],
+  ]
 })
